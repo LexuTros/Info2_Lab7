@@ -15,8 +15,7 @@ typedef struct Stack {
 } Stack;
 
 Stack* create(unsigned int cap){
-	Stack* S;
-	S = malloc(sizeof(Stack));
+	Stack* S = malloc(sizeof(Stack));
 	S->items = malloc(sizeof(int)*cap);
 	S->capacity = cap;
 	S->top = 0;
