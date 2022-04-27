@@ -10,7 +10,7 @@
 
 typedef struct Stack {  
 	unsigned int capacity; // positive int (with 0)
-	int* items; 
+	int* items; // points to first elemtent of array
   int top; // idx of first free element of stack
 } Stack;
 
@@ -38,7 +38,38 @@ int is_full(Stack* S){
 	else {return 0;}
 }
 
+int get_capacity(Stack* S){
+	return S->capacity;
+}
 
+int num_items(Stack* S){
+	return S->top;
+}
+
+void push(Stack* S, int x){
+	S->items[S->top] = x;
+	S->top++;
+}
+
+int pop(Stack* S){
+
+}
+
+int peek(Stack* S){
+
+}
+
+void print(Stack* S){
+
+}
+
+int is_equal(Stack* S1, Stack* S2){
+
+}
+
+void reverse(Stack* S){
+
+} 
 
 int main() {
 	//TODO: your implementation
