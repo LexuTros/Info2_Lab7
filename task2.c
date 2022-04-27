@@ -14,9 +14,31 @@ typedef struct Stack {
   int top; // idx of first free element of stack
 } Stack;
 
-void create(Stack S){
-	
+Stack* create(unsigned int cap){
+	Stack* S;
+	S = malloc(sizeof(Stack));
+	S->items = malloc(sizeof(int)*cap);
+	S->capacity = cap;
+	S->top = 0;
+	return S;
 }
+
+void delete(Stack* S){
+	free(S->items);
+	free(S);
+}
+
+int is_empty(Stack* S){
+	if(S->top == 0) {return 1;}
+	else {return 0;}
+}
+
+int is_full(Stack* S){
+	if(S->top == S->capacity) {return 1;}
+	else {return 0;}
+}
+
+
 
 int main() {
 	//TODO: your implementation
