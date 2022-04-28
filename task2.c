@@ -13,7 +13,7 @@
 typedef struct Stack {  
 	unsigned int capacity; // positive int (with 0)
 	int* items; // points to first elemtent of array
-  int top; // idx of first free element of stack
+  	int top; // idx of first free element of stack
 } Stack;
 
 Stack* create(unsigned int cap){
