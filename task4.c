@@ -133,35 +133,7 @@ void reverse(Stack* S){
 	}	
 }
 
-
-void get_span(int data[], int num_data, int* spans){
-	Stack* S = create(num_data);
-	int span = 1;
-
-	for (int i = 0; i < num_data; i++)
-	{
-		if (i>0)
-		{
-			if (data[i] >= data[i-1])
-			{
-				span++;
-				while (!is_empty(S) && data[i] >= data[peek(S)])
-				{
-					span = span + spans[pop(S)];
-				}
-			}
-			else
-			{
-				push(S, i-1);
-				span = 1;
-			}
-		}
-		spans[i] = span;
-	}
-	delete(S);
-}
-
-void print_Array(int input[], int size) {
+void print_array(int input[], int size) {
 	printf("[");
 	for (int i = 0; i < size - 1; i++) {
 		printf("%d, ", input[i]);
@@ -169,13 +141,38 @@ void print_Array(int input[], int size) {
 	printf("%d]\n", input[size - 1]);
 }
 
+int stack_possibility(int In[], int Out[], int size){
+    int j = 0;
+    Stack* S = create(size);
+
+    for (int i = 0; i < size; i++)
+    {
+        while (is_empty(S) || peek(S) != Out[i])
+        {
+            if (j >= size)
+            {
+                return 0; // impossible
+            }
+            push(S, In[j]);
+            j++;
+        }
+        pop(S);
+    }
+    delete(S);
+    return 1; // possible
+}
+
 int main() {
-	int A[5] = {6, 3, 4, 2, 7};
-	int num_data = 5;
-	int* spans = malloc(sizeof(int)*num_data);
+    int in1[] = {1, 2, 3, 4, 5};
+    int out1[] = {4, 5, 3, 2, 1};
+    int size_out1 = sizeof(out1) / sizeof(out1[0]);
+    int result1 = stack_possibility(in1, out1, size_out1);
+    printf("Result for first two arrays: %d\n", result1);
+    int in2[] = {1, 2, 3, 4, 5};
+    int out2[] = {4, 3, 5, 1, 2};
+    int size_out2 = sizeof(out2) / sizeof(out2[0]);
+    int result2 = stack_possibility(in2, out2, size_out2);
+    printf("Result for second two arrays: %d\n", result2);
 
-	get_span(A, num_data, spans);
-	print_Array(spans, num_data);
-
-  return 0;
+    return 0;
 }
